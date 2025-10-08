@@ -29,7 +29,7 @@ const ALLOW_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:8087';
 
 const AWS_BEARER_TOKEN = process.env.AWS_BEARER_TOKEN_BEDROCK || '';
 const BEDROCK_REGION = process.env.BEDROCK_REGION || 'ap-southeast-2';
-const BEDROCK_MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-sonnet-4-5-20250929-v1:0';
+const BEDROCK_MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-5-sonnet-20241022-v2:0';
 const INFERENCE_PROFILE_ID = process.env.BEDROCK_INFERENCE_PROFILE_ID || '';
 const INFERENCE_PROFILE_ARN = process.env.BEDROCK_INFERENCE_PROFILE_ARN || '';
 
@@ -54,7 +54,9 @@ async function handleInvoke(messages) {
   if (!AWS_BEARER_TOKEN) throw new Error('Missing AWS_BEARER_TOKEN_BEDROCK');
 
   const host = `https://bedrock-runtime.${BEDROCK_REGION}.amazonaws.com`;
-  const url = `${host}/model/${encodeURIComponent(BEDROCK_MODEL_ID)}/invoke`;
+  // Use inference profile ID as model ID if available, otherwise use the model ID
+  const modelId = INFERENCE_PROFILE_ID || BEDROCK_MODEL_ID;
+  const url = `${host}/model/${encodeURIComponent(modelId)}/invoke`;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -120,6 +122,21 @@ const server = createServer(async (req, res) => {
 
   if (req.method === 'GET' && url.pathname === '/health') {
     return sendJson(res, 200, { ok: true });
+  }
+
+  if (req.method === 'GET' && url.pathname === '/debug') {
+    return sendJson(res, 200, { 
+      tokenSet: !!AWS_BEARER_TOKEN,
+      tokenLength: AWS_BEARER_TOKEN ? AWS_BEARER_TOKEN.length : 0,
+      tokenEndsWithEquals: AWS_BEARER_TOKEN ? AWS_BEARER_TOKEN.endsWith('=') : false,
+      tokenFirstChars: AWS_BEARER_TOKEN ? AWS_BEARER_TOKEN.substring(0, 10) + '...' : 'none',
+      region: BEDROCK_REGION,
+      modelId: BEDROCK_MODEL_ID,
+      inferenceProfileId: INFERENCE_PROFILE_ID || 'not set',
+      inferenceProfileArn: INFERENCE_PROFILE_ARN || 'not set',
+      apiEndpoint: `https://bedrock-runtime.${BEDROCK_REGION}.amazonaws.com`,
+      apiType: 'InvokeModel'
+    });
   }
 
   return notFound(res);
