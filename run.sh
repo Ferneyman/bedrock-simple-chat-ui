@@ -25,6 +25,19 @@ cleanup() {
 # Set up signal handlers
 trap cleanup SIGINT SIGTERM
 
+# Kill any existing processes on ports 8087 and 8088
+echo "🧹 Cleaning up any existing processes on ports 8087 and 8088..."
+if lsof -ti:8087 >/dev/null 2>&1; then
+    echo "   Killing process on port 8087..."
+    lsof -ti:8087 | xargs kill -9 2>/dev/null || true
+fi
+if lsof -ti:8088 >/dev/null 2>&1; then
+    echo "   Killing process on port 8088..."
+    lsof -ti:8088 | xargs kill -9 2>/dev/null || true
+fi
+echo "✅ Port cleanup complete"
+echo ""
+
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then
     echo "❌ Node.js is not installed. Please install Node.js first."
