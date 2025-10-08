@@ -6,9 +6,8 @@ export default defineConfig({
   plugins: [
     react()
   ],
-  resolve: {
-    alias: {
-      './runtimeConfig': './runtimeConfig.browser', // This is needed for Amplify
-    },
-  },
+  server: {
+    port: 8087,
+    host: true
+  }
 })

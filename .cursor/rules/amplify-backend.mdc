@@ -1,0 +1,41 @@
+---
+globs: amplify/**/*.ts,amplify/**/*.js
+---
+
+# AWS Amplify Backend Configuration
+
+## Backend Structure
+- **Main Definition**: [amplify/backend.ts](mdc:amplify/backend.ts) - Entry point for backend resources
+- **Authentication**: [amplify/auth/resource.ts](mdc:amplify/auth/resource.ts) - Cognito configuration
+- **Data Layer**: [amplify/data/resource.ts](mdc:amplify/data/resource.ts) - Data resources and APIs
+
+## Amplify Gen2 Patterns
+- Use `defineBackend()` to configure backend resources
+- Import and configure auth and data resources
+- Follow the established pattern in [amplify/backend.ts](mdc:amplify/backend.ts)
+
+## Authentication Configuration
+- Configure Cognito User Pool and Identity Pool
+- Set up proper authentication flows
+- Configure social providers if needed
+- Implement proper authorization rules
+
+## Data Resources
+- Define GraphQL schemas for data access
+- Configure proper authorization rules
+- Set up relationships between data types
+- Implement proper data validation
+
+## Deployment
+- Use `npx ampx sandbox` for local development
+- Deploy to AWS with `npx ampx pipeline-deploy`
+- Configure environment-specific settings
+- Monitor deployment status and logs
+
+## Best Practices
+- Keep backend configuration in TypeScript for type safety
+- Use proper resource naming conventions
+- Implement proper error handling
+- Follow AWS security best practices
+- Use environment variables for sensitive configuration
+- Implement proper logging and monitoring

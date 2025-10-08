@@ -1,0 +1,47 @@
+---
+globs: *.jsx,*.js,*.css
+---
+
+# UI Component Guidelines
+
+## Cloudscape Design System
+- Use AWS Cloudscape Design components for consistent AWS-native UI
+- Import components from `@cloudscape-design/components` and `@cloudscape-design/chat-components`
+- Follow Cloudscape patterns for layout, spacing, and interaction
+
+## Key Components Used
+- **Chat Interface**: `ChatBubble`, `Avatar`, `PromptInput` from chat-components
+- **Layout**: `Container`, `Form`, `FormField`, `SpaceBetween`
+- **Navigation**: `TopNavigation` with proper identity and utilities configuration
+- **Feedback**: `LoadingBar`, `LiveRegion` for accessibility
+- **Modals**: `Modal` for confirmations and settings
+
+## Styling Approach
+- Use CSS modules or component-specific CSS files
+- Follow the pattern in [src/ChatComponent.css](mdc:src/ChatComponent.css) and [src/App.css](mdc:src/App.css)
+- Use Cloudscape design tokens for consistent spacing and colors
+- Implement responsive design for mobile compatibility
+
+## Accessibility
+- Use proper ARIA labels and roles
+- Implement `LiveRegion` for screen reader announcements
+- Use semantic HTML elements
+- Follow WCAG guidelines for color contrast and keyboard navigation
+
+## Chat Interface Patterns
+- Use the established chat bubble pattern with proper sender identification
+- Implement auto-scrolling to latest messages
+- Handle markdown rendering with `react-markdown` and `rehype-raw`
+- Support speech-to-text integration with microphone button
+
+## Form Validation
+- Use Cloudscape FormField with errorText for validation
+- Implement real-time validation feedback
+- Clear errors when user starts typing
+- Use the validation pattern from [src/ConfigComponent.jsx](mdc:src/ConfigComponent.jsx)
+
+## Responsive Design
+- Use flexible layouts that work on desktop and mobile
+- Implement proper touch targets for mobile devices
+- Use CSS Grid and Flexbox for responsive layouts
+- Test on various screen sizes

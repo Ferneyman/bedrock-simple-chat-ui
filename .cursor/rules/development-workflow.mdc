@@ -1,0 +1,55 @@
+---
+alwaysApply: true
+---
+
+# Development Workflow
+
+## Local Development
+- Start development server: `npm run dev` (runs on http://localhost:5173)
+- Use Vite's hot module replacement for fast development
+- Test authentication flow locally before deploying
+
+## Code Quality
+- Run `npm run lint` before committing code
+- Follow ESLint configuration in [eslint.config.js](mdc:eslint.config.js)
+- Use React hooks properly (no violations of rules of hooks)
+- Maintain consistent code formatting
+
+## Build Process
+- Build for production: `npm run build`
+- Output goes to `dist/` folder
+- Test build locally: `npm run preview`
+- Ensure all environment-specific configurations are handled
+
+## Deployment Options
+
+### Manual Deployment
+1. Build the application: `npm run build`
+2. Package dist folder: `cd dist && zip -r ../deployment.zip ./*`
+3. Upload to AWS Amplify Console manually
+
+### Automated Deployment
+1. Fork repository to your GitHub account
+2. Connect AWS Amplify to GitHub repository
+3. Use the provided build configuration in README.md
+4. Enable automatic deployments on push to main branch
+
+## Testing Strategy
+- Test authentication flow with different Cognito configurations
+- Test all three agent types (Bedrock, Strands, AgentCore)
+- Test error handling and edge cases
+- Test responsive design on different screen sizes
+- Test speech-to-text functionality in supported browsers
+
+## Configuration Management
+- Never commit sensitive configuration to version control
+- Use localStorage for client-side configuration persistence
+- Validate all configuration before saving
+- Provide clear error messages for invalid configurations
+
+## Security Considerations
+- Always use HTTPS in production
+- Validate all user inputs
+- Handle AWS credential expiration gracefully
+- Implement proper error handling without exposing sensitive information
+- Follow AWS security best practices for IAM roles and policies

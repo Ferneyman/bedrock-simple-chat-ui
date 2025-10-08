@@ -1,0 +1,42 @@
+---
+globs: *.jsx,*.js,*.ts
+---
+
+# AWS Integration Guidelines
+
+## Authentication Flow
+- Use Amazon Cognito for user authentication via `@aws-amplify/ui-react`
+- Configure Amplify in [src/ConfigComponent.jsx](mdc:src/ConfigComponent.jsx) with Cognito settings
+- Always validate required Cognito fields: userPoolId, userPoolClientId, identityPoolId, region
+
+## Bedrock Agent Integration
+- Support three agent types: Bedrock Agent, Strands Agent, and AgentCore Agent
+- Use `BedrockAgentRuntimeClient` for standard Bedrock agents
+- Use `LambdaClient` for Strands agents via Lambda functions
+- Use `BedrockAgentCoreClient` for AgentCore agents
+- Always handle streaming responses properly (see [src/ChatComponent.jsx](mdc:src/ChatComponent.jsx))
+
+## Credential Management
+- Never store long-term AWS credentials in the frontend
+- Use temporary credentials from Cognito Identity Pool
+- Fetch credentials with `AWSAuth.fetchAuthSession()` before making AWS calls
+- Handle credential expiration gracefully
+
+## Configuration Management
+- Store all AWS configuration in localStorage as JSON
+- Validate configuration before saving (see validation in [src/ConfigComponent.jsx](mdc:src/ConfigComponent.jsx))
+- Support multiple agent types with conditional validation
+- Auto-extract regions from ARNs when possible
+
+## Error Handling
+- Handle AWS SDK errors with specific error messages
+- Display user-friendly error messages in the UI
+- Log detailed errors to console for debugging
+- Handle network timeouts and retries appropriately
+
+## Security Best Practices
+- Use HTTPS for all communications
+- Implement proper CORS handling
+- Validate all user inputs before sending to AWS services
+- Use IAM roles with least privilege principle
+- Never expose sensitive configuration in client-side code

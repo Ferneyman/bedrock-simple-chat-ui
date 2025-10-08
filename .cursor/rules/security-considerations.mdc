@@ -1,0 +1,54 @@
+---
+alwaysApply: true
+---
+
+# Security Considerations
+
+## Authentication & Authorization
+- Use Amazon Cognito for secure user authentication
+- Implement proper session management with temporary credentials
+- Never store long-term AWS credentials in client-side code
+- Use IAM roles with least privilege principle
+- Handle authentication state changes gracefully
+
+## Data Protection
+- Encrypt sensitive data in transit (HTTPS)
+- Validate all user inputs before processing
+- Sanitize data before displaying in chat interface
+- Implement proper CORS policies
+- Use secure headers and content security policies
+
+## AWS Service Security
+- Configure proper IAM policies for Bedrock agent access
+- Use temporary credentials from Cognito Identity Pool
+- Implement proper error handling without exposing sensitive information
+- Monitor AWS service usage and costs
+- Follow AWS security best practices for all services
+
+## Frontend Security
+- Never expose API keys or secrets in client-side code
+- Implement proper input validation and sanitization
+- Use Content Security Policy (CSP) headers
+- Handle XSS vulnerabilities in markdown rendering
+- Implement proper session timeout handling
+
+## Configuration Security
+- Store configuration securely in localStorage
+- Validate all configuration inputs
+- Implement proper error handling for invalid configurations
+- Use environment variables for sensitive configuration in production
+- Never commit sensitive configuration to version control
+
+## Monitoring & Logging
+- Implement proper error logging without exposing sensitive data
+- Monitor authentication failures and suspicious activity
+- Log AWS service usage for cost monitoring
+- Implement proper audit trails for user actions
+- Use AWS CloudWatch for monitoring and alerting
+
+## Compliance Considerations
+- Follow data privacy regulations (GDPR, CCPA)
+- Implement proper data retention policies
+- Handle user data deletion requests
+- Maintain proper audit logs for compliance
+- Implement proper access controls and user management

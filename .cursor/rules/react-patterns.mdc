@@ -1,0 +1,39 @@
+---
+globs: *.jsx,*.js
+---
+
+# React Development Patterns
+
+## Component Structure
+- Use functional components with hooks (no class components)
+- Follow the established pattern in [src/App.jsx](mdc:src/App.jsx) for component organization
+- Use PropTypes for type checking as shown in existing components
+
+## State Management
+- Use `useState` for local component state
+- Use `useEffect` for side effects and lifecycle management
+- Use `useCallback` for memoized functions (see [src/ChatComponent.jsx](mdc:src/ChatComponent.jsx) examples)
+- Use `useRef` for DOM references (like `messagesEndRef` for auto-scrolling)
+
+## AWS Integration Patterns
+- Always use `useAuthenticator` from `@aws-amplify/ui-react` for authentication state
+- Initialize AWS clients in `useEffect` after authentication
+- Use `AWSAuth.fetchAuthSession()` to get temporary credentials
+- Handle AWS SDK errors gracefully with try-catch blocks
+
+## Component Communication
+- Pass callbacks as props for parent-child communication
+- Use the established pattern: `onConfigSet`, `onLogout`, `onConfigEditorClick`
+- Maintain configuration state in localStorage for persistence
+
+## Error Handling
+- Always wrap AWS SDK calls in try-catch blocks
+- Display user-friendly error messages in the chat interface
+- Log detailed errors to console for debugging
+- Use the error display pattern from [src/ChatComponent.jsx](mdc:src/ChatComponent.jsx)
+
+## Performance Considerations
+- Use `useCallback` for functions passed to child components
+- Implement proper dependency arrays in `useEffect`
+- Use React.memo for expensive components if needed
+- Follow the session management pattern for chat persistence

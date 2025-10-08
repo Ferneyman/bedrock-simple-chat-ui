@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+
+# Project Structure Guide
+
+This is a React-based secure chat UI for Amazon Bedrock Agents built with AWS Amplify.
+
+## Key Architecture Components
+
+### Frontend Structure
+- **Entry Point**: [src/main.jsx](mdc:src/main.jsx) - React application entry point
+- **Main App**: [src/App.jsx](mdc:src/App.jsx) - Root component managing authentication and configuration flow
+- **Chat Interface**: [src/ChatComponent.jsx](mdc:src/ChatComponent.jsx) - Main chat UI with Bedrock agent integration
+- **Configuration**: [src/ConfigComponent.jsx](mdc:src/ConfigComponent.jsx) - AWS service configuration management
+- **Speech Features**: [src/js/useSpeechToText.jsx](mdc:src/js/useSpeechToText.jsx) - Speech-to-text functionality
+
+### AWS Amplify Backend
+- **Backend Definition**: [amplify/backend.ts](mdc:amplify/backend.ts) - Amplify backend configuration
+- **Authentication**: [amplify/auth/resource.ts](mdc:amplify/auth/resource.ts) - Cognito authentication setup
+- **Data Layer**: [amplify/data/resource.ts](mdc:amplify/data/resource.ts) - Data resources configuration
+
+### Build & Configuration
+- **Vite Config**: [vite.config.js](mdc:vite.config.js) - Build tool configuration with Amplify runtime alias
+- **ESLint Config**: [eslint.config.js](mdc:eslint.config.js) - Code quality and React-specific linting rules
+- **Package Config**: [package.json](mdc:package.json) - Dependencies and scripts
+
+## Key Dependencies
+- **AWS Amplify UI**: `@aws-amplify/ui-react` for authentication components
+- **AWS SDK**: `@aws-sdk/client-bedrock-agent-runtime` for Bedrock agent communication
+- **Cloudscape Design**: `@cloudscape-design/components` for AWS-native UI components
+- **React**: Modern React 18 with hooks and functional components
+
+## Development Workflow
+1. Local development: `npm run dev` (Vite dev server on port 5173)
+2. Build: `npm run build` (creates dist/ folder)
+3. Lint: `npm run lint` (ESLint validation)
+4. Deploy: Manual upload to AWS Amplify or automated via GitHub integration

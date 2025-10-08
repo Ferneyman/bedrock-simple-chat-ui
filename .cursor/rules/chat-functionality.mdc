@@ -1,0 +1,50 @@
+---
+globs: src/ChatComponent.jsx,src/js/*.jsx
+---
+
+# Chat Functionality Guidelines
+
+## Session Management
+- Use unique session IDs for each chat conversation
+- Store session data in localStorage for persistence
+- Implement session creation and loading patterns from [src/ChatComponent.jsx](mdc:src/ChatComponent.jsx)
+- Handle session expiration and cleanup
+
+## Message Handling
+- Support multiple message types: user messages, agent responses, error messages
+- Implement proper message formatting with markdown support
+- Use `ReactMarkdown` with `rehype-raw` for rich text rendering
+- Handle streaming responses from Bedrock agents
+
+## Agent Integration
+- Support three agent types with conditional logic:
+  - **Bedrock Agent**: Standard Bedrock agent with streaming responses
+  - **Strands Agent**: Lambda-based agent with JSON responses
+  - **AgentCore Agent**: AgentCore runtime with streaming support
+- Handle different response formats for each agent type
+- Implement proper error handling for each agent type
+
+## Speech-to-Text Integration
+- Use the custom hook in [src/js/useSpeechToText.jsx](mdc:src/js/useSpeechToText.jsx)
+- Check browser support for speech recognition
+- Handle microphone permissions gracefully
+- Provide visual feedback for listening state
+
+## Real-time Features
+- Implement auto-scrolling to latest messages
+- Show loading indicators during agent processing
+- Display task completion progress for Bedrock agents
+- Use `LiveRegion` for accessibility announcements
+
+## Error Handling
+- Display user-friendly error messages in chat
+- Log detailed errors to console for debugging
+- Handle network timeouts and retries
+- Provide clear feedback for authentication issues
+
+## UI/UX Patterns
+- Use Cloudscape chat components for consistent design
+- Implement proper message bubbles with avatars
+- Support keyboard shortcuts (Enter to send)
+- Provide clear visual feedback for all user actions
+- Handle long messages with proper text wrapping
